@@ -1,0 +1,90 @@
+package com.company;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class Company {
+
+      private String name;
+      private ArrayList<Worker>allWorkers;
+      private ArrayList<Integer>sales;
+      private HashMap<String,Worker>map;
+
+
+
+    public HashMap<String, Worker> getMap() {
+        return map;
+    }
+
+    public void setMap(HashMap<String, Worker> map) {
+        this.map = map;
+    }
+
+    public Company(String name){
+          this.name = name;
+
+
+          map = new HashMap<String, Worker>();
+          allWorkers = new ArrayList<Worker>();
+          sales = new ArrayList<Integer>();
+      }
+      public int totalPayments(){
+          int sum = 0;
+          for(int i=0; i < allWorkers.size(); i++) {
+              allWorkers.get(i).Salary();
+              sum += allWorkers.get(i).Salary();
+          }
+          return sum;
+      }
+      public int totalEarnings(){
+          int sum = 0;
+          for(int i=0; i < sales.size(); i++){
+              sales.get(i);
+              sum += sales.get(i);
+          }
+          return sum;
+      }
+     public Worker workedMost(){
+          Worker M = allWorkers.get(0);
+         for(int i = 1; i < allWorkers.size(); i++){
+              M = allWorkers.get(i).diligent(M);
+         }
+         return  M;
+     }
+
+     public void addWorker(Worker w){
+         allWorkers.add(w);
+     }
+
+
+     public void crisis(String hour, String pay, Worker w) {
+
+
+
+         double sum = allWorkers.size() * 0.5;
+         int sumHour = 0, sumPay = 0;
+
+         String key2 = "hour";
+         String key3 = "pay";
+
+         for (int j = 0; j < sum; j++) {
+             for (int i = 0; i < map.size(); i++) {
+                 if((map.get(i).biggFrom8() > map.get(sumHour).biggFrom8()) && (map.get(i) != map.get(key2))){
+                     sumHour = i;
+
+                 }
+
+                 if((map.get(i).getPay() > map.get(sumPay).getPay()) && (map.get(i) != map.get(key3))){
+                     sumPay = i;
+                 }
+             }
+             map.get(sumHour).setIsMarked("hour");
+             map.get(sumPay).setIsMarked("pay");
+         }
+         for(int i = 0;i < map.size(); i++){
+             if(map.get(i).getIsMarked() == "hour" || map.get(i).getIsMarked() == "pay"){
+                 map.remove(i);
+             }
+         }
+     }
+}
